@@ -10,9 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class UploadController extends Controller
 {
     //Index
-    public function new()
+    public function index()
     {
-        return view('upload.index');
+        $Uploads = Upload::where('User_hash', 'LIKE', Auth::user()->User_hash)->get();
+        return view('upload.index', compact('Uploads'));
+    }
+
+    //Create
+    public function create()
+    {
+        return view('upload.create');
     }
 
     //Store
@@ -46,4 +53,14 @@ class UploadController extends Controller
         
         return redirect()->back();
     }
+
+    //Delete
+    public function delete($a)
+    {
+        Upload::delete($a);
+        //return redirect()->back()->with('success', $a);
+        //echo $a;
+        //Upload::where('File_hash', $a)->delete();
+    }
+    
 }

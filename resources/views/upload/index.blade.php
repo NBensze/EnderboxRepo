@@ -6,13 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Upload</h1>
-    <form action="{{route('upload.store')}}" method="post">
-        @csrf
-    <input type="text" id="FileNameINP" name="FileNameINP">
-    <input type="file" id="FileUploadINP" name="FileUploadINP">
-    <textarea id="FileCommentTAREA" name="FileCommentTAREA"></textarea>
-    <button id="FileUploadBTN">Upload</button>
-    </form>
+    <h1>Index</h1>
+    @foreach ($Uploads as $UploadValue)
+    @csrf
+       {{ $UploadValue->File_name}}
+       {{ $UploadValue->File_comment}}
+       <form action="{{route('upload.delete', $UploadValue->id)}}" method="post">
+          @method('DELETE')
+          <button>Delete file</button><br>
+       </form>
+    @endforeach
 </body>
 </html>

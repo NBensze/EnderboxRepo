@@ -9,5 +9,5 @@ class Upload extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['User_hash', 'File_hash', 'File_name', 'File_blob', 'File_comment'];
+    protected $fillable = ['id', 'User_hash', 'File_hash', 'File_name', 'File_blob', 'File_comment'];
 }
