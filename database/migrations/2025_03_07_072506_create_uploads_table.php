@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('uploads', function (Blueprint $table) {
             $table->id();
+            $table->string('User_hash');
+            $table->string('File_hash');
+            $table->string('File_name');
+            $table->binary('File_blob');
+            $table->string('File_comment');
             $table->timestamps();
         });
     }

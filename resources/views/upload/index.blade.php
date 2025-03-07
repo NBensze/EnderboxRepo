@@ -7,10 +7,11 @@
 </head>
 <body>
     <h1>Upload</h1>
-    <form>
-    <input type="text" id="FileNameINP">
-    <input type="file" id="FileUploadINP">
-    <textarea id="FileCommentTAREA"></textarea>
+    <form action="{{route('upload.store')}}" method="post">
+        @csrf
+    <input type="text" id="FileNameINP" name="FileNameINP">
+    <input type="file" id="FileUploadINP" name="FileUploadINP">
+    <textarea id="FileCommentTAREA" name="FileCommentTAREA"></textarea>
     <button id="FileUploadBTN">Upload</button>
     </form>
 </body>
