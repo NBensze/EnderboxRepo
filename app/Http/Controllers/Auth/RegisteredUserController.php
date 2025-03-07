@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use DateTime;
 
 class RegisteredUserController extends Controller
 {
@@ -35,8 +36,11 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $Now = new DateTime();
+        $HashSeed = $Now->format('Y-m-d_H:i:s').$request->name;
+
         $user = User::create([
-            //'User_hash' => 
+            'User_hash' => hash('sha256', $HashSeed),
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),

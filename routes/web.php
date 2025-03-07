@@ -18,7 +18,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/upload', [UploadController::class, 'index'])->name('upload.index');
+Route::get('/upload', [UploadController::class, 'create'])->name('upload.index');
 Route::post('/upload', [UploadController::class, 'store'])->name('upload.store');
+
+Route::middleware('auth')->group(function ()
+{
+    Route::get('/main', [UploadController::class, 'index'])->name('upload.index')
+});
 
 require __DIR__.'/auth.php';
