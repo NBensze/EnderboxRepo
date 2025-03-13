@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function ()
 {
     Route::get('/main', [UploadController::class, 'index'])->name('upload.index');
     Route::delete('/main{a}', [UploadController::class, 'delete'])->name('upload.delete');
+    Route::get('/main{index}', [UploadController::class, 'download'])->name('upload.download');
 });
 
 require __DIR__.'/auth.php';

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('User_hash');
             $table->string('File_hash');
             $table->string('File_name');
+            $table->string('File_extension');
             $table->binary('File_blob');
             $table->string('File_comment');
             $table->timestamps();

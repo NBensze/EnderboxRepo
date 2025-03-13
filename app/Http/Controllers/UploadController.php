@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Upload;
 use DateTime;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
@@ -29,6 +31,7 @@ class UploadController extends Controller
         $Req->validate(
             [
                'FileNameINP' => 'required|string|max:100',
+               //'FileUploadINP' => 'required|file',
                'FileCommentTAREA' => 'string|max:500',    
             ]);
 
@@ -41,12 +44,18 @@ class UploadController extends Controller
         {
             $UserHash = Auth::user()->User_hash;
         }
+/*
+        $FIle = $Req->file($Req->FileUploadINP);
+         $ext = $FIle->extension();
+
+        session()->flash('success', $ext);/**/ 
 
         Upload::create(
             [
                 'User_hash' => $UserHash,
                 'File_hash' => hash('sha256', $HashSeed),
                 'File_name' => $Req->FileNameINP,
+                'File_extension' =>  ".".explode(".", $Req->FileUploadINP)[1],
                 'File_blob' => $Req->FileUploadINP,
                 'File_comment' => $Req->FileCommentTAREA,
             ]);
@@ -57,10 +66,16 @@ class UploadController extends Controller
     //Delete
     public function delete($a)
     {
-        Upload::delete($a);
+        //Upload::delete($a);
         //return redirect()->back()->with('success', $a);
         //echo $a;
         //Upload::where('File_hash', $a)->delete();
+    }
+
+    public function download($index)
+    {
+        $File = Upload::where('User_hash', 'LIKE', Auth::user()->User_hash)->get();
+        return Storage::download('/download/', $File->File_blob);
     }
     
 }

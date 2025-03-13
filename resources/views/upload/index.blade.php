@@ -15,6 +15,9 @@
           @method('DELETE')
           <button>Delete file</button><br>
        </form>
+       <form action="{{route('upload.download', $UploadValue->id)}}" method="get">
+        <button>Download file</button>
+       </form>
     @endforeach
 </body>
 </html>
