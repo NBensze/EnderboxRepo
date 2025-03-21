@@ -32,7 +32,7 @@ class UploadController extends Controller
         $Req->validate(
             [
                'FileNameINP' => 'required|string|max:100',
-               //'FileUploadINP' => 'required|file',
+               'FileUploadINP' => 'required',
                'FileCommentTAREA' => 'string|max:500',    
             ]);
 
@@ -45,18 +45,6 @@ class UploadController extends Controller
         {
             $UserHash = Auth::user()->User_hash;
         }
-/*
-        $FIle = $Req->file($Req->FileUploadINP);
-         $ext = $FIle->extension();
-
-        session()->flash('success', $ext);/**/ 
-
-        /*
-        if ($Req->hasFile('FileUploadINP') == false)
-        {
-            return redirect()->back();
-        }
-            */
 
         Upload::create(
             [

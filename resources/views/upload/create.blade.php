@@ -17,7 +17,7 @@
             <!-- File Name Input -->
             <div class="form-group">
                 <label for="FileNameINP">File Name</label>
-                <input type="text" id="FileNameINP" name="FileNameINP" class="form-control" placeholder="Enter file name">
+                <input maxlength="50" type="text" id="FileNameINP" name="FileNameINP" class="form-control" placeholder="Enter file name">
             </div>
 
             <!-- File Upload Input -->
@@ -29,11 +29,11 @@
             <!-- File Comment Textarea -->
             <div class="form-group">
                 <label for="FileCommentTAREA">File Comment</label>
-                <textarea id="FileCommentTAREA" name="FileCommentTAREA" class="form-control" rows="4" placeholder="Enter comments about the file"></textarea>
+                <textarea maxlength="100" id="FileCommentTAREA" name="FileCommentTAREA" class="form-control" rows="4" placeholder="Enter comments about the file"></textarea>
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" id="FileUploadBTN" class="btn btn-primary btn-block">Upload</button>
+            <button type="submit" id="FileUploadBTN" class="btn btn-primary btn-block" onclick="CheckFileName()">Upload</button>
         </form>
 
         <!-- Success Message -->
@@ -49,4 +49,20 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+<script>
+    function CheckFileName()
+    {
+        let Name = document.getElementById('FileNameINP').value;
+
+        console.log("xd");
+        const Regex = /^[a-zA-Z0-9]*$/;
+
+        if (Regex.test(Name) == false)
+        {
+           alert('File name bad format');
+           return;
+        }
+    }
+</script>
+
 </html>
