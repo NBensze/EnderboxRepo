@@ -7,7 +7,8 @@ use DateTime;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use lluminate\Http\RedirectResponse;
 
 class UploadController extends Controller
 {
@@ -61,12 +62,18 @@ class UploadController extends Controller
             [
                 'User_hash' => $UserHash,
                 'File_hash' => hash('sha256', $HashSeed),
-                'File_name' => $Req->FileNameINP, //$SelectedFile->getClientOriginalName(), //$Req->FileNameINP,
-                'File_extension' => ".".$Req->FileUploadINP->getClientMimeType(), //getClientOriginalExtension(),  //".".explode(".", $Req->FileUploadINP)[1],
+                'File_name' => $Req->FileNameINP,
+                'File_extension' => $Req->FileUploadINP->extension(),
                 'File_blob' => file_get_contents($Req->FileUploadINP->getRealPath()),
                 'File_comment' => $Req->FileCommentTAREA,
             ]);
-        
+
+            if (Auth::check())
+            {
+                session()->flash('upload_session', 'success');
+            }
+
+
         return redirect()->back();
     }
 
@@ -75,7 +82,7 @@ class UploadController extends Controller
     {
         Upload::where('File_hash', $a)->delete();
         //Upload::delete($a);
-        //return redirect()->back()->with('success', $a);
+        return redirect()->back()->with('success', $a);
         //echo $a;
         //Upload::where('File_hash', $a)->delete();
     }
@@ -83,7 +90,7 @@ class UploadController extends Controller
     public function download($index)
     {
         $File = Upload::find($index); //Upload::where('File_hash', 'LIKE', $index); //Upload::where('User_hash', 'LIKE', Auth::user()->User_hash)->get();
-        return response($File->File_blob)->header('Content-Type', $File->File_extension)->header('Content-Disposition', 'inline; filename='.$File->File_name.".".$File->File_extension)->header('Content-Length', strlen($File->File_blob));
+        return response($File->File_blob)->header('Content-Type', $File->File_extension)->header('Content-Disposition', 'attachment; filename='.$File->File_name.".".$File->File_extension)->header('Content-Length', strlen($File->File_blob));
         //return Storage::download('/download/', $File->File_blob);
     }
     

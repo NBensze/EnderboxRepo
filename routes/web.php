@@ -28,4 +28,11 @@ Route::middleware('auth')->group(function ()
     Route::get('/main{index}', [UploadController::class, 'download'])->name('upload.download');
 });
 
+//Sessions
+Route::get('/set-session', function() 
+{
+    //session(['XD' => 'success']);
+    //return redirect()->route('Session');
+});
+
 require __DIR__.'/auth.php';
