@@ -83,7 +83,7 @@ class UploadController extends Controller
     public function download($index)
     {
         $File = Upload::find($index); //Upload::where('File_hash', 'LIKE', $index); //Upload::where('User_hash', 'LIKE', Auth::user()->User_hash)->get();
-        return response($File->File_blob)->header('Content-Type', $File->File_extension)->header('Content-Disposition', 'inline; filename='.$File->File_name)->header('Content-Length', strlen($File->File_blob));
+        return response($File->File_blob)->header('Content-Type', $File->File_extension)->header('Content-Disposition', 'inline; filename='.$File->File_name.".".$File->File_extension)->header('Content-Length', strlen($File->File_blob));
         //return Storage::download('/download/', $File->File_blob);
     }
     
