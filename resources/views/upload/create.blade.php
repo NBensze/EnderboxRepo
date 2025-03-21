@@ -33,7 +33,7 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" id="FileUploadBTN" class="btn btn-primary btn-block" onclick="CheckFileName()">Upload</button>
+            <button type="submit" id="FileUploadBTN" class="btn btn-primary btn-block" onclick="CheckUpload()">Upload</button>
         </form>
 
         <!-- Success Message -->
@@ -54,12 +54,29 @@
     {
         let Name = document.getElementById('FileNameINP').value;
 
-        console.log("xd");
-        const Regex = /^[a-zA-Z0-9]*$/;
+        const SpecialCharRegex = /^[a-zA-Z0-9]*$/;
 
-        if (Regex.test(Name) == false)
+        if (Name == "")
+        {
+            alert('File name is empty');
+            return;
+        }
+
+        if (SpecialCharRegex.test(Name) == false)
         {
            alert('File name bad format');
+           return;
+        }
+    }
+
+    function CheckUpload()
+    {
+        let Upload = document.getElementById('FileUploadINP');
+        const File = Upload.files[0];
+
+        if (File.size > 10000000)
+        {
+           alert('File is too large');
            return;
         }
     }
