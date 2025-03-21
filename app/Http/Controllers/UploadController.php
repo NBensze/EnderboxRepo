@@ -66,6 +66,7 @@ class UploadController extends Controller
     //Delete
     public function delete($a)
     {
+        Upload::where('File_hash', $a)->delete();
         //Upload::delete($a);
         //return redirect()->back()->with('success', $a);
         //echo $a;
@@ -74,8 +75,9 @@ class UploadController extends Controller
 
     public function download($index)
     {
-        $File = Upload::where('User_hash', 'LIKE', Auth::user()->User_hash)->get();
-        return Storage::download('/download/', $File->File_blob);
+        $File = Upload::find($index); //Upload::where('File_hash', 'LIKE', $index); //Upload::where('User_hash', 'LIKE', Auth::user()->User_hash)->get();
+        return response($File->File_blob)->header('Content-Type', $File->File_extension)->header('Content-Disposition', 'attachment; filename='.$File->File_name);
+        //return Storage::download('/download/', $File->File_blob);
     }
     
 }
