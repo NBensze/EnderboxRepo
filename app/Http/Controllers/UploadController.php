@@ -50,13 +50,20 @@ class UploadController extends Controller
 
         session()->flash('success', $ext);/**/ 
 
+        /*
+        if ($Req->hasFile('FileUploadINP') == false)
+        {
+            return redirect()->back();
+        }
+            */
+
         Upload::create(
             [
                 'User_hash' => $UserHash,
                 'File_hash' => hash('sha256', $HashSeed),
-                'File_name' => $Req->FileNameINP,
-                'File_extension' =>  ".".explode(".", $Req->FileUploadINP)[1],
-                'File_blob' => $Req->FileUploadINP,
+                'File_name' => $Req->FileNameINP, //$SelectedFile->getClientOriginalName(), //$Req->FileNameINP,
+                'File_extension' => ".".$Req->FileUploadINP->getClientMimeType(), //getClientOriginalExtension(),  //".".explode(".", $Req->FileUploadINP)[1],
+                'File_blob' => file_get_contents($Req->FileUploadINP->getRealPath()),
                 'File_comment' => $Req->FileCommentTAREA,
             ]);
         
@@ -76,7 +83,7 @@ class UploadController extends Controller
     public function download($index)
     {
         $File = Upload::find($index); //Upload::where('File_hash', 'LIKE', $index); //Upload::where('User_hash', 'LIKE', Auth::user()->User_hash)->get();
-        return response($File->File_blob)->header('Content-Type', $File->File_extension)->header('Content-Disposition', 'attachment; filename='.$File->File_name);
+        return response($File->File_blob)->header('Content-Type', $File->File_extension)->header('Content-Disposition', 'inline; filename='.$File->File_name)->header('Content-Length', strlen($File->File_blob));
         //return Storage::download('/download/', $File->File_blob);
     }
     
