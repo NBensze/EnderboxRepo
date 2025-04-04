@@ -11,7 +11,7 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Upload</h1>
         
-        <form action="{{ route('upload.store') }}" method="post" enctype="multipart/form-data">
+        <form id="UploadFORM" action="{{ route('upload.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
             <!-- File Name Input -->
@@ -32,8 +32,7 @@
                 <textarea maxlength="100" id="FileCommentTAREA" name="FileCommentTAREA" class="form-control" rows="4" placeholder="Enter comments about the file"></textarea>
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" id="FileUploadBTN" class="btn btn-primary btn-block" onclick="CheckUpload()">Upload</button>
+            <input type="submit" class="btn btn-primary btn-block" onclick="CheckAll()" value="Upload input"/>
         </form>
 
         <!-- Success Message -->
@@ -59,14 +58,16 @@
         if (Name == "")
         {
             alert('File name is empty');
-            return;
+            return false;
         }
 
         if (SpecialCharRegex.test(Name) == false)
         {
            alert('File name bad format');
-           return;
+           return false;
         }
+
+        return true;
     }
 
     function CheckUpload()
@@ -74,10 +75,26 @@
         let Upload = document.getElementById('FileUploadINP');
         const File = Upload.files[0];
 
-        if (File.size > 10000000)
+        if (File.size > 100000000)
         {
            alert('File is too large');
-           return;
+           return false;
+        }
+
+        return true;
+    }
+
+    function CheckAll()
+    {
+        //document.getElementById("UploadFORM").submit();
+        console.log(CheckFileName());
+        console.log(CheckUpload());
+        
+        
+        if (CheckFileName() == true && CheckUpload() == true)
+        {
+            //console.log("XDD");
+            document.getElementById("UploadFORM").submit();
         }
     }
 </script>
