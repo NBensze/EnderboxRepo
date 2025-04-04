@@ -28,7 +28,7 @@
 
             <div class="form-group">
                <input id="GeneratePasswordCHBOX" type="checkbox" value="Generate password" onchange="GeneratePassword()"/>
-               <input type="text" id="FilePasswordINP"/>
+               <input type="text" class="form-control" id="FilePasswordINP" name="FilePasswordINP"/>
             </div>
 
             <!-- File Comment Textarea -->
@@ -105,7 +105,7 @@
 
     function GeneratePassword()
     {
-        let IsChecked = document.getElementById("GeneratePasswordCHBOX").value;
+        let IsChecked = document.getElementById("GeneratePasswordCHBOX").checked;
 
         document.getElementById("FilePasswordINP").value = "";
 
