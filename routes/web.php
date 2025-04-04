@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function ()
     Route::get('/main{index}', [UploadController::class, 'download'])->name('upload.download');
 });
 
-Route::get('/view{hash}', [UploadController::class, 'view'])->name('upload.view');
+Route::get('/view/{hash}', [UploadController::class, 'view'])->name('upload.view');
 
 //Sessions
 Route::get('/set-session', function() 
