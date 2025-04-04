@@ -26,6 +26,11 @@
                 <input type="file" id="FileUploadINP" name="FileUploadINP" class="form-control-file">
             </div>
 
+            <div class="form-group">
+               <input id="GeneratePasswordCHBOX" type="checkbox" value="Generate password" onchange="GeneratePassword()"/>
+               <input type="text" id="FilePasswordINP"/>
+            </div>
+
             <!-- File Comment Textarea -->
             <div class="form-group">
                 <label for="FileCommentTAREA">File Comment</label>
@@ -95,6 +100,18 @@
         {
             //console.log("XDD");
             document.getElementById("UploadFORM").submit();
+        }
+    }
+
+    function GeneratePassword()
+    {
+        let IsChecked = document.getElementById("GeneratePasswordCHBOX").value;
+
+        document.getElementById("FilePasswordINP").value = "";
+
+        if (IsChecked == true)
+        {
+            document.getElementById("FilePasswordINP").value = "asd123";
         }
     }
 </script>

@@ -61,6 +61,7 @@ class UploadController extends Controller
                 'File_extension' => $Req->FileUploadINP->extension(),
                 'File_blob' => file_get_contents($Req->FileUploadINP->getRealPath()),
                 'File_comment' => $Req->FileCommentTAREA,
+                'File_password' => $Req->FilePasswordINP,
             ]);
 
             if (Auth::check())

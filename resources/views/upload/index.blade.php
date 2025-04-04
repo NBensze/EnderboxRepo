@@ -14,7 +14,7 @@
         @foreach ($Uploads as $UploadValue)
         <div class="card mb-4">
             <div class="card-body">
-                <h5 class="card-title">{{ $UploadValue->File_name }}</h5>
+                <h5 class="card-title text-center">{{ $UploadValue->File_name }}</h5>
                 <p class="card-text">{{ $UploadValue->File_comment }}</p>
                 
                 <!-- Delete Button -->
@@ -33,6 +33,7 @@
                     <button type="submit" class="btn btn-success btn-sm">Download file</button>
                 </form>
 
+                <!--Copy link-->
                 <span onclick="CopyLink('{{$UploadValue->File_hash}}')" class="text-primary text-decoration-underline" style="cursor: pointer;">Copy link</span>
             </div>
         </div>
@@ -48,6 +49,7 @@
         function CopyLink(FileHash)
         {
             navigator.clipboard.writeText("http://127.0.0.1:8000/view/" + FileHash);
+            alert("Link copied");
         }
 
         function OpenLink(FileHash)

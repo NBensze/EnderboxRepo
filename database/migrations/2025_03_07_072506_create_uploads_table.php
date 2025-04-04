@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('File_extension');
             $table->longText('File_blob')->charset("binary");
             $table->string('File_comment')->nullable();
+            $table->string('File_password')->nullable();
             $table->timestamps();
         });
     }
