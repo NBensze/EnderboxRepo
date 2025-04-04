@@ -21,7 +21,7 @@
                 <form action="{{ route('upload.delete', $UploadValue->File_hash) }}" method="post" class="d-inline">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Delete file</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete fileeee</button>
                 </form>
                 
                 <!-- Download Button -->

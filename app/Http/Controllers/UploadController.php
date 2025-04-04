@@ -25,6 +25,13 @@ class UploadController extends Controller
         return view('upload.create');
     }
 
+    //View
+    public function view($hash)
+    {
+        $Uploads = Upload::where('File_hash', 'LIKE', $hash)->get();
+        return view('upload.view', compact('Uploads'));
+    }
+
     //Store
     public function store(Request $Req)
     {
