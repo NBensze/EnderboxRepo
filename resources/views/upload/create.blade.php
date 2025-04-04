@@ -30,12 +30,12 @@
 
             <div class="form-group">
                 <input id="GeneratePasswordCHBOX" type="checkbox" value="Generate password" onchange="GeneratePassword()"/>
-                <select id="PasswordLengthSLCT">
+                <select id="PasswordLengthSLCT" onchange="GeneratePassword()">
                     <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                 </select>
-                <input type="text" class="form-control" id="FilePasswordINP" name="FilePasswordINP" readonly="false"/>
+                <input type="text" class="form-control" id="FilePasswordINP" name="FilePasswordINP" readonly/>
             </div>
 
             <!-- File Comment Textarea -->
