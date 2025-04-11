@@ -9,11 +9,13 @@
     <h2>View</h2>
         @foreach ($Uploads as $UploadValue)
         @if ($UploadValue->File_password != "")
-           Password<input id="PasswordINP" type="text"/>
+        <div id="PasswordDIV">
+        Password<input id="PasswordINP" type="text"/>
            <button onclick="CheckPassword('{{$UploadValue->File_password}}')">View file</button>
            <img src onerror="CheckPassword('{{$UploadValue->File_password}}')">
+        </div>
         @endif
-        <div id="DIV" class="card mb-4" style="display: none;">
+        <div id="FileDIV" class="card mb-4" style="display: block;">
             <div class="card-body">
                 <h5 class="card-title">{{ $UploadValue->File_name }}</h5>
                 <p class="card-text">{{ $UploadValue->File_comment }}</p>
@@ -29,17 +31,20 @@
         <script>
             function CheckPassword(Password)
             { 
+                //Contains password and password is matching
                 if (Password == document.getElementById("PasswordINP").value)
                 {
                     alert("Logged in");
                     document.getElementById("DIV").style.display = "block";
                     return;
-                }
+                }  
 
-                if (Password == "")
+                //Contains password 
+                if (Password != "")
                 {
-                    document.getElementById("DIV").style.display = "block";
-                }
+                    document.getElementById("DIV").style.display = "none";
+                    return;
+                } 
             }
         </script>
 </body>
