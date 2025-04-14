@@ -10,6 +10,10 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Uploaded Files</h1>
 
+        @if ($AllFiles->count() == 0)
+           <h2>Nem talalhatoak fajlok!</h2>
+        @endif
+
         @foreach ($Uploads as $UploadValue)
         <div class="card mb-4">
             <div class="card-body">

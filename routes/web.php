@@ -20,9 +20,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//Upload without login
 Route::get('/upload', [UploadController::class, 'create'])->name('upload.create');
 Route::post('/upload', [UploadController::class, 'store'])->name('upload.store');
 
+//Upload with login
 Route::middleware('auth')->group(function ()
 {
     Route::get('/main', [UploadController::class, 'index'])->name('upload.index');
@@ -30,25 +32,17 @@ Route::middleware('auth')->group(function ()
     Route::get('/main{index}', [UploadController::class, 'download'])->name('upload.download');
 });
 
+//View (login not required)
 Route::get('/view/{hash}', [UploadController::class, 'view'])->name('upload.view');
 
-//Sessions
-Route::get('/set-session', function() 
+
+//Admin stuff
+Route::middleware(AdminMiddleware::class)->group(function () 
 {
-    //session(['XD' => 'success']);
-    //return redirect()->route('Session');
+    Route::delete('/admin/index{deletehash}', [AdminController::class, 'delete'])->name('admin.delete');
+    Route::get('/admin/index', [AdminController::class, 'searchbyuser'])->name('admin.searchbyuser');
 });
+//Route::get('/admin/index', [AdminController::class, 'getall'])->name('admin.getall')->middleware(AdminMiddleware::class);
 
-Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index')->middleware(AdminMiddleware::class);
-
-/*
-Route::middleware(['AdminMiddleware'])->group(function () {
-    ;
-
-    Route::get('/admin/index', function () {
-        return view('admin.settings'); 
-    });
-});
-*/
 
 require __DIR__.'/auth.php';
