@@ -39,10 +39,9 @@ Route::get('/view/{hash}', [UploadController::class, 'view'])->name('upload.view
 //Admin stuff
 Route::middleware(AdminMiddleware::class)->group(function () 
 {
-    Route::delete('/admin/index{deletehash}', [AdminController::class, 'delete'])->name('admin.delete');
     Route::get('/admin/index', [AdminController::class, 'searchbyuser'])->name('admin.searchbyuser');
+    Route::delete('/admin/index{deletehash}', [AdminController::class, 'delete'])->name('admin.delete');
 });
-//Route::get('/admin/index', [AdminController::class, 'getall'])->name('admin.getall')->middleware(AdminMiddleware::class);
 
 
 require __DIR__.'/auth.php';

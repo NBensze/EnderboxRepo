@@ -13,21 +13,9 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    //Delete
-    public function delete($deletehash)
-    {
-        Upload::where('File_hash', $deletehash)->delete();
-        return redirect()->back()->with('success', $deletehash);
-    }
-
-    private function getuserhash($username)
-    {
-        
-        return $UserHash;
-    }
-
     public function searchbyuser(Request $Req)
     {
+        //Get user by name
         if ($Req->SearchINP != "")
         {
             $UserHash = User::where('name', 'LIKE', $Req->SearchINP)->get();
@@ -35,10 +23,18 @@ class AdminController extends Controller
             return view('admin.index', compact('AllFiles'));
         }
 
+        //Get all user
         if ($Req->SearchINP == "")
         {
             $AllFiles = Upload::all();
             return view('admin.index', compact('AllFiles'));
         }
+    }
+
+    //Delete
+    public function delete($deletehash)
+    {
+        Upload::where('File_hash', $deletehash)->delete();
+        return redirect()->back()->with('success', $deletehash);
     }
 }
