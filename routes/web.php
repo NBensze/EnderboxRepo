@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-use App\Middleware\AdminMiddleware;
+use App\Http\Middleware\AdminMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,12 +39,16 @@ Route::get('/set-session', function()
     //return redirect()->route('Session');
 });
 
+Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index')->middleware(AdminMiddleware::class);
+
+/*
 Route::middleware(['AdminMiddleware'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
+    ;
 
     Route::get('/admin/index', function () {
         return view('admin.settings'); 
     });
 });
+*/
 
 require __DIR__.'/auth.php';
