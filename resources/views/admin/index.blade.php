@@ -9,8 +9,8 @@
 <body>
         <form action="{{ route('admin.searchbyuser') }}" method="get" class="d-inline">
             @csrf
-            <input type="text" name="SearchINP">
-            <button type="submit" class="btn btn-success btn-sm">Search</button>
+            <input type="text" onchange="ChangeBtnContent()" id="SearchINP" name="SearchINP">
+            <button type="submit" id="SearchBTN" class="btn btn-success btn-sm">Search</button>
         </form>
 
         @if ($AllFiles->count() == 0)
@@ -59,6 +59,20 @@
         function OpenLink(FileHash)
         {
             window.open("http://127.0.0.1:8000/view/" + FileHash);
+        }
+
+        function ChangeBtnContent()
+        {
+            let Inp = document.getElementById("SearchINP");
+            let Btn = document.getElementById("SearchBTN");
+
+            if (Inp.value == "")
+            {
+                Btn.value = "Get all";
+                return;
+            }
+            
+            return Btn.value = "Search";
         }
     </script> 
 </body>

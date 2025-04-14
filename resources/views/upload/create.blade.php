@@ -44,7 +44,7 @@
                 <textarea maxlength="100" id="FileCommentTAREA" name="FileCommentTAREA" class="form-control" rows="4" placeholder="Enter comments about the file"></textarea>
             </div>
 
-            <input type="submit" class="btn btn-primary btn-block" onclick="CheckAll()" value="Upload input" />
+            <input type="submit" class="btn btn-primary btn-block" onclick="CheckAll()" value="Upload input"/>
         </form>
 
         <!-- Success Message -->
