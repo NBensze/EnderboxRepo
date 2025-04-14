@@ -1,26 +1,24 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    </head>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <label for="email" style="color: black;">Email</label>
+            <input id="email" class="form-control" type="text" name="email" :value="old('email')" required autofocus autocomplete="username"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
+            <label for="password" style="color: black;">Password</label>
+            <input class="form-control" type="password" id="password" name="password" required autofocus autocomplete="current-password">
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
@@ -44,4 +42,7 @@
             </x-primary-button>
         </div>
     </form>
+    <script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    </script>
 </x-guest-layout>
