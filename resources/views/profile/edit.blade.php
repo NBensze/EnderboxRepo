@@ -72,7 +72,7 @@
         .active{
             color:rgb(168, 168, 168) !important;
         }
-        </style>
+    </style>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <a class="navbar-brand" href="#">
