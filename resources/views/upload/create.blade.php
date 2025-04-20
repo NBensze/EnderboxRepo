@@ -148,11 +148,11 @@
         
                     <div class="mb-3">
                         <div class="form-check form-switch">
-                            <label for="GeneratePasswordCHBOX" class="form-label">Generate password</label> 
+                            <label for="GeneratePasswordCHBOX" class="form-label">Password protected</label> 
                             <input id="GeneratePasswordCHBOX" type="checkbox" role="switch" value="Generate password" class="form-check-input" onchange="GeneratePassword()"/>
                         </div>
-                        <label for="PasswordLengthSLCT" class="form-label">Lenght</label>
-                        <select id="PasswordLengthSLCT" onchange="GeneratePassword()">
+                        <label for="PasswordLengthSLCT" class="form-label">Password length</label>
+                        <select id="PasswordLengthSLCT" class="form-select mb-3" style="width: 75px" onchange="GeneratePassword()">
                             <option value="10">10</option>
                             <option value="15">15</option>
                             <option value="20">20</option>
