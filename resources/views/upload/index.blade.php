@@ -10,7 +10,8 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Uploaded Files</h1>
 
-        @if ($AllFiles->count() == 0)
+        @if (empty($AllFiles))
+        
            <h2>Nem talalhatoak fajlok!</h2>
         @endif
 
