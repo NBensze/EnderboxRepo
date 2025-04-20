@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <!-- Bootstrap CSS link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
@@ -165,7 +166,7 @@
                         <textarea maxlength="400" id="FileCommentTAREA" name="FileCommentTAREA" class="form-control" rows="3" placeholder="Enter comments about the file"></textarea>
                     </div>
         
-                    <input type="submit" class="btn btn-secondary" onclick="CheckAll()" value="Upload input"/>
+                    <input type="submit" class="btn btn-secondary" onclick="CheckAll()" value="Upload"/>
                 </form>
             </div>
         </div>
