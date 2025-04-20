@@ -92,7 +92,7 @@
                 <a class="nav-link text-light" aria-current="page" href="{{ url('/upload') }}">Upload</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active text-light" href="#">Uploaded files</a>
+                <a class="nav-link active text-light" href="{{ url('/main') }}">Uploaded files</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-light" href="{{ url('/profile') }}">Profile</a>
@@ -123,7 +123,7 @@
                 <form action="{{ route('upload.delete', $UploadValue->File_hash) }}" method="post" class="d-inline">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Delete fileeee</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete file</button>
                 </form>
 
                 <!-- Open Button -->
