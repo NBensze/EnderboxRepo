@@ -6,46 +6,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload</title>
     <!-- Bootstrap CSS link -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
 
+<style>
+    body {
+        background-color: #343a40;
+    }
+    .card {
+        background-color: #495057;
+        border-radius: 0.5rem;
+    }
+    .card-body {
+        color: #f8f9fa;
+    }
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .card-subtitle {
+        font-size: 1rem;
+        color: #adb5bd;
+    }
+    .form-label {
+        font-weight: bold;
+    }
+    .form-control {
+        background-color: #495057;
+        color: #f8f9fa;
+        border: 1px solid #6c757d;
+    }
+    .form-control:focus {
+        background-color: #495057;
+        color: #f8f9fa;
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+    .text-muted {
+        color: #adb5bd !important;
+    }
+    .text-light {
+        color: #f8f9fa !important;
+    }
+    .text-dark {
+        color: #212529 !important;
+    }
+    .bg-body-tertiary {
+        background-color: #343a40 !important;
+    }
+    .active{
+        color:rgb(168, 168, 168) !important;
+    }
+</style>
+
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Upload</h1>
-
-        <form id="UploadFORM" action="{{ route('upload.store') }}" method="post" enctype="multipart/form-data">
-            @csrf
-
-            <!-- File Name Input -->
-            <div class="form-group">
-                <label for="FileNameINP">File Name</label>
-                <input maxlength="50" type="text" id="FileNameINP" name="FileNameINP" class="form-control" placeholder="Enter file name">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+              <img src="{{ asset('images/logo.png') }}" alt="" width="50" height="44">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item text-light">
+                <a class="nav-link active" aria-current="page" href="{{ url('/upload') }}">Upload</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="{{ url('/profile') }}">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="#">Admin</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="container">
+        <div class="card mt-3">
+            <div class="card-body">
+                <h2 class="card-title">{{ __('Upload') }}</h2>
+                <h4 class="card-subtitle mb-2 text-muted">Upload your files here</h4>
+                <!-- <p class="card-text">You can upload files up to 100MB in size.</p> -->
+                <form id="UploadFORM" action="{{ route('upload.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+        
+                    <!-- File Name Input -->
+                    <div class="mb-3">
+                        <label for="FileNameINP" class="form-label">File Name</label>
+                        <input maxlength="50" type="text" id="FileNameINP" name="FileNameINP" class="form-control" placeholder="Enter file name">
+                    </div>
+        
+                    <!-- File Upload Input PROBLÉMÁS -->
+                    <div class="mb-3">
+                        <label for="FileUploadINP" class="form-label">Choose File</label>
+                        <input type="file" id="FileUploadINP" name="FileUploadINP" class="form-control file-input" required/>
+                    </div>
+        
+                    <div class="mb-3">
+                        <label for="GeneratePasswordCHBOX" class="form-label">Generate password</label> <br>
+                        <input id="GeneratePasswordCHBOX" type="checkbox" value="Generate password" onchange="GeneratePassword()"/> <br>
+                        <label for="PasswordLengthSLCT" class="form-label">Lenght</label>
+                        <select id="PasswordLengthSLCT" onchange="GeneratePassword()">
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <input type="text" class="form-control" id="FilePasswordINP" name="FilePasswordINP" readonly/>
+                    </div>
+        
+                    <!-- File Comment Textarea -->
+                    <div class="mb-3">
+                        <label for="FileCommentTAREA" class="form-label">File Comment</label>
+                        <textarea maxlength="400" id="FileCommentTAREA" name="FileCommentTAREA" class="form-control" rows="3" placeholder="Enter comments about the file"></textarea>
+                    </div>
+        
+                    <input type="submit" class="btn btn-secondary" onclick="CheckAll()" value="Upload input"/>
+                </form>
             </div>
-
-            <!-- File Upload Input -->
-            <div class="form-group">
-                <label for="FileUploadINP">Choose File</label>
-                <input type="file" id="FileUploadINP" name="FileUploadINP" class="form-control-file">
-            </div>
-
-            <div class="form-group">
-                <input id="GeneratePasswordCHBOX" type="checkbox" value="Generate password" onchange="GeneratePassword()"/>
-                <select id="PasswordLengthSLCT" onchange="GeneratePassword()">
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                </select>
-                <input type="text" class="form-control" id="FilePasswordINP" name="FilePasswordINP" readonly/>
-            </div>
-
-            <!-- File Comment Textarea -->
-            <div class="form-group">
-                <label for="FileCommentTAREA">File Comment</label>
-                <textarea maxlength="100" id="FileCommentTAREA" name="FileCommentTAREA" class="form-control" rows="4" placeholder="Enter comments about the file"></textarea>
-            </div>
-
-            <input type="submit" class="btn btn-primary btn-block" onclick="CheckAll()" value="Upload input"/>
-        </form>
+        </div>
 
         <!-- Success Message -->
         @if (session('upload_session') == 'success')
@@ -55,10 +151,8 @@
         @endif
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 <script>
     function CheckFileName() {
