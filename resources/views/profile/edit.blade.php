@@ -9,6 +9,11 @@
 </head>
 <body class="bg-dark text-light">
     <style>
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25) !important;
+            border-color: #6c757d !important;
+            outline: none !important;
+        }
         body {
             background-color: #343a40;
         }

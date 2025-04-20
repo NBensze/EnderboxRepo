@@ -11,6 +11,15 @@
 </head>
 
 <style>
+    .form-control::placeholder {
+        color: #bac2c9 !important; 
+        opacity: 1 !important; 
+    }
+    .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25) !important;
+        border-color: #6c757d !important;
+        outline: none !important;
+    }
     body {
         background-color: #343a40;
     }
@@ -74,9 +83,24 @@
     .active{
         color:rgb(168, 168, 168) !important;
     }
+    .form-check-input:checked {
+        background-color: #6c757d !important;
+        border-color: #6c757d !important;
+    }
+    .form-check-input:checked::before{
+        background-color: white !important;
+    }
+    .form-check-input:focus {
+        box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25) !important;
+        border-color: #6c757d !important;
+    }
+    .form-check-input:focus::before {
+        box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25) !important;
+        border-color: #6c757d !important;
+    }
 </style>
 
-<body>
+<body class="bg-dark text-light">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
           <a class="navbar-brand" href="#">
@@ -122,8 +146,10 @@
                     </div>
         
                     <div class="mb-3">
-                        <label for="GeneratePasswordCHBOX" class="form-label">Generate password</label> <br>
-                        <input id="GeneratePasswordCHBOX" type="checkbox" value="Generate password" onchange="GeneratePassword()"/> <br>
+                        <div class="form-check form-switch">
+                            <label for="GeneratePasswordCHBOX" class="form-label">Generate password</label> 
+                            <input id="GeneratePasswordCHBOX" type="checkbox" role="switch" value="Generate password" class="form-check-input" onchange="GeneratePassword()"/>
+                        </div>
                         <label for="PasswordLengthSLCT" class="form-label">Lenght</label>
                         <select id="PasswordLengthSLCT" onchange="GeneratePassword()">
                             <option value="10">10</option>
@@ -146,9 +172,10 @@
 
         <!-- Success Message -->
         @if (session('upload_session') == 'success')
-        <div class="alert alert-success mt-4">
-            <a href="{{ route('upload.index') }}" class="btn btn-link">My Files</a>
-        </div>
+        <div class="alert alert-light alert-dismissible fade show mt-4" role="alert">
+            <strong>Successful upload!</strong> Click <a href="{{ route('upload.index') }}">here</a> to view your uploaded files.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
         @endif
     </div>
 
@@ -199,6 +226,8 @@
     }
 
     function GeneratePassword() {
+
+
         let IsChecked = document.getElementById("GeneratePasswordCHBOX").checked;
         let PasswordLength = document.getElementById("PasswordLengthSLCT").value;
         console.log(PasswordLength);
@@ -217,6 +246,7 @@
             document.getElementById("FilePasswordINP").value = Result;
         }
     }
+    
 </script>
 
 </html>
