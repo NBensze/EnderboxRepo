@@ -50,6 +50,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('upload.create', absolute: false));
+       //return redirect(route('upload.create', absolute: false));
+       return redirect()->intended('/upload'); //Registrálásra kattintva (ha már előtte be volt jelentkezve) után a feltöltésre irányítja (fixálva)//
     }
 }
