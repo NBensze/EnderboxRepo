@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         //return redirect()->intended(route('upload.create', absolute: false)); 
-        return redirect()->intended('/upload'); //Login után a feltöltésre irányítja (fixálva)
+        return redirect()->intended('/upload'); //Login után a feltöltésre irányítja (fixálva)//
     }
 
     /**
