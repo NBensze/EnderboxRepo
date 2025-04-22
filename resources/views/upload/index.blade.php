@@ -114,6 +114,7 @@
         @endif
 
         @foreach ($Uploads as $UploadValue)
+
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title text-center">{{ $UploadValue->File_name }}</h5>
@@ -123,18 +124,18 @@
                 <form action="{{ route('upload.delete', $UploadValue->File_hash) }}" method="post" class="d-inline">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Delete file</button>
+                    <button type="submit" class="btn btn-danger btn-sm mt-3">Delete file</button>
                 </form>
 
                 <!-- Open Button -->
-                <button class="btn btn-success btn-sm" onclick="OpenLink('{{$UploadValue->File_hash}}')">Open link</button>
-                
+                <button class="btn btn-secondary btn-sm mt-3" onclick="OpenLink('{{$UploadValue->File_hash}}')">Open link</button>
+ 
                 <!-- Download Button -->
                 <form action="{{ route('upload.download', $UploadValue->id) }}" method="get" class="d-inline">
                     @csrf
-                    <button type="submit" class="btn btn-success btn-sm">Download file</button>
+                    <button type="submit" class="btn btn-success btn-sm mt-3 ">Download file</button>
                 </form>
-
+                <br>
                 <!--Copy link-->
                 <span onclick="CopyLink('{{$UploadValue->File_hash}}')" class="text-primary text-decoration-underline" style="cursor: pointer;">Copy link</span>
             </div>
