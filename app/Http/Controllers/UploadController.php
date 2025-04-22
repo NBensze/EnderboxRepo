@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use lluminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
@@ -59,6 +60,7 @@ class UploadController extends Controller
                 'File_hash' => hash('sha256', $HashSeed),
                 'File_name' => $Req->FileNameINP,
                 'File_extension' => $Req->FileUploadINP->extension(),
+                'File_size' => number_format(strlen(file_get_contents($Req->FileUploadINP->getRealPath())) / pow(1024, 2), 20, '.', ''),
                 'File_blob' => file_get_contents($Req->FileUploadINP->getRealPath()),
                 'File_comment' => $Req->FileCommentTAREA,
                 'File_password' => $Req->FilePasswordINP,

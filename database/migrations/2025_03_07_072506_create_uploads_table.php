@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('File_hash');
             $table->string('File_name');
             $table->string('File_extension');
+            $table->string('File_size');
             $table->longText('File_blob')->charset("binary");
             $table->string('File_comment')->nullable();
             $table->string('File_password')->nullable();
+            $table->timestamp('File_uploaddate');
             $table->timestamps();
         });
     }

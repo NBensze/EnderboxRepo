@@ -119,6 +119,9 @@
             <div class="card-body">
                 <h5 class="card-title text-center">{{ $UploadValue->File_name }}</h5>
                 <p class="card-text">{{ $UploadValue->File_comment }}</p>
+                <p>Extension: .{{ $UploadValue->File_extension }}</p>
+                <p>Uploaddate: {{ $UploadValue->File_uploaddate }}</p>
+                <p>Size: {{ $UploadValue->File_size }} in megabytes</p>
                 
                 <!-- Delete Button -->
                 <form action="{{ route('upload.delete', $UploadValue->File_hash) }}" method="post" class="d-inline">
