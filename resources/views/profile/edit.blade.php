@@ -93,6 +93,9 @@
           <a class="nav-link text-light" aria-current="page" href="{{ url('/upload') }}">Upload</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link text-light" href="{{ url('/main') }}">Uploaded files</a>
+          </li>
+        <li class="nav-item">
           <a class="nav-link active" href="{{ url('/profile') }}">Profile</a>
         </li>
         <li class="nav-item">
