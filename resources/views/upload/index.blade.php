@@ -103,6 +103,14 @@
               </li>
               @endif
             </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <a class="nav-link text-light" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                    </form>
+                </li>
+            </ul>
           </div>
         </div>
       </nav>
