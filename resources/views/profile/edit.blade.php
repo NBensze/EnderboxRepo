@@ -99,7 +99,7 @@
           <a class="nav-link active" href="{{ url('/profile') }}">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Admin</a>
+          <a class="nav-link text-light" href="{{ url('/admin/index') }}">Admin</a>
         </li>
       </ul>
     </div>

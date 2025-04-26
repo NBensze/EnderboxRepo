@@ -111,7 +111,7 @@
 
         @if (!empty($AllFiles))
             @if ( $AllFiles->count() == 0)
-                <h2 class="text-center">Nem talalhatoak fajlok!</h2>
+                <h2 class="text-center">No files uploaded yet!</h2>
             @endif
         @endif
 
