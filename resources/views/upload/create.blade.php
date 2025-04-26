@@ -166,7 +166,7 @@
                     <!-- File Comment Textarea -->
                     <div class="mb-3">
                         <label for="FileCommentTAREA" class="form-label">File Comment</label>
-                        <textarea maxlength="400" id="FileCommentTAREA" name="FileCommentTAREA" class="form-control" rows="3" placeholder="Enter comments about the file"></textarea>
+                        <textarea maxlength="200" id="FileCommentTAREA" name="FileCommentTAREA" class="form-control" rows="3" placeholder="Enter comments about the file"></textarea>
                     </div>
         
                     <input type="submit" class="btn btn-secondary" onclick="CheckAll()" value="Upload"/>
