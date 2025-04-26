@@ -21,9 +21,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//Upload without login
-Route::get('/upload', [UploadController::class, 'create'])->name('upload.create');
-Route::post('/upload', [UploadController::class, 'store'])->name('upload.store');
 
 //Upload with login
 Route::middleware('auth')->group(function ()
@@ -31,6 +28,11 @@ Route::middleware('auth')->group(function ()
     Route::get('/main', [UploadController::class, 'index'])->name('upload.index');
     Route::delete('/main{a}', [UploadController::class, 'delete'])->name('upload.delete');
     Route::get('/main{index}', [UploadController::class, 'download'])->name('upload.download');
+
+    //Upload without login
+Route::get('/upload', [UploadController::class, 'create'])->name('upload.create');
+Route::post('/upload', [UploadController::class, 'store'])->name('upload.store');
+
 });
 
 //View (login not required)
