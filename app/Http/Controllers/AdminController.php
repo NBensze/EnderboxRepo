@@ -26,7 +26,7 @@ class AdminController extends Controller
         //Get all user
         if ($Req->SearchINP == "")
         {
-            $AllFiles = Upload::all();
+            $AllFiles = Upload::join('users', 'uploads.User_hash', '=', 'users.User_hash')->select('uploads.*', 'users.name')->get(); //Upload::all();
             return view('admin.index', compact('AllFiles'));
         }
     }
