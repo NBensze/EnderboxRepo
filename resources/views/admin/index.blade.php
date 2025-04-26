@@ -151,7 +151,7 @@
                 <form action="{{ route('admin.delete', $FileValue->File_hash) }}" method="post" class="d-inline">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Delete fileeee</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete file</button>
                 </form>
 
                 
