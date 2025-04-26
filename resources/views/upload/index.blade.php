@@ -97,9 +97,11 @@
               <li class="nav-item">
                 <a class="nav-link text-light" href="{{ url('/profile') }}">Profile</a>
               </li>
+              @if (Auth::user()->User_role === 'admin')
               <li class="nav-item">
-                <a class="nav-link text-light" href="#">Admin</a>
+                <a class="nav-link text-light" href="{{ url('/admin/index') }}">Admin</a>
               </li>
+              @endif
             </ul>
           </div>
         </div>
@@ -118,10 +120,12 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title text-center">{{ $UploadValue->File_name }}</h5>
-                <p class="card-text">{{ $UploadValue->File_comment }}</p>
-                <p>Extension: .{{ $UploadValue->File_extension }}</p>
-                <p>Uploaddate: {{ $UploadValue->File_uploaddate }}</p>
-                <p>Size: {{ $UploadValue->File_size }} in megabytes</p>
+                <div id="DataDiv{{ $loop->index }}" style="display: none;">
+                <p><b>Extension:</b> .{{ $UploadValue->File_extension }}</p>
+                <p><b>Upload date:</b>  {{ $UploadValue->File_uploaddate }}</p>
+                <p><b>Size:</b>  {{ $UploadValue->File_size }} in megabytes</p>
+                <p><b>Comment:</b>  {{ $UploadValue->File_comment }}</p>
+                </div>
                 
                 <!-- Delete Button -->
                 <form action="{{ route('upload.delete', $UploadValue->File_hash) }}" method="post" class="d-inline">
@@ -138,9 +142,18 @@
                     @csrf
                     <button type="submit" class="btn btn-success btn-sm mt-3 ">Download file</button>
                 </form>
+
+                <!-- Expand data div Button -->
+                <button id="ExpandBTN" class="btn btn-secondary btn-sm mt-3" onclick="ShowHideDataDiv('{{ $loop->index }}')">Show file data</button>
                 <br>
+
                 <!--Copy link-->
                 <span onclick="CopyLink('{{$UploadValue->File_hash}}')" class="text-primary text-decoration-underline" style="cursor: pointer;">Copy link</span>
+
+                @if ($UploadValue->File_password != "")
+                <!--Copy password-->
+                <span onclick="CopyPassword('{{$UploadValue->File_password}}')" class="text-primary text-decoration-underline" style="cursor: pointer;">Copy password</span>
+                @endif
             </div>
         </div>
         @endforeach
@@ -155,9 +168,28 @@
             alert("Link copied");
         }
 
+        function CopyPassword(FilePassword)
+        {
+            navigator.clipboard.writeText(FilePassword);
+            alert("Password copied");
+        }
+
         function OpenLink(FileHash)
         {
             window.open("http://127.0.0.1:8000/view/" + FileHash);
+        }
+
+        function ShowHideDataDiv(DivIndex)
+        {
+            //Hide
+            if (document.getElementById("DataDiv" + DivIndex).style.display == "block")
+            {
+                document.getElementById("DataDiv" + DivIndex).style.display = "none";
+                return;
+            }
+
+            //Show
+            document.getElementById("DataDiv" + DivIndex).style.display = "block";
         }
     </script>
 </body>
