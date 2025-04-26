@@ -146,6 +146,7 @@
                 <p>Extension: .{{ $FileValue->File_extension }}</p>
                 <p>Uploaddate: {{ $FileValue->File_uploaddate }}</p>
                 <p>Size: {{ $FileValue->File_size }} in megabytes</p>
+                <p>Name: {{ $FileValue->name }} name</p>
                 
                 <form action="{{ route('admin.delete', $FileValue->File_hash) }}" method="post" class="d-inline">
                     @csrf
