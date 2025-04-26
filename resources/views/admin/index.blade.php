@@ -143,10 +143,10 @@
             <div class="card-body">
                 <h5 class="card-title text-center">{{ $FileValue->File_name }}</h5>
                 <p class="card-text">{{ $FileValue->File_comment }}</p>
-                <p>Extension: .{{ $FileValue->File_extension }}</p>
-                <p>Uploaddate: {{ $FileValue->File_uploaddate }}</p>
-                <p>Size: {{ $FileValue->File_size }} in megabytes</p>
-                <p>Name: {{ $FileValue->name }} name</p>
+                <p class="card-text">Extension: .{{ $FileValue->File_extension }}</p>
+                <p class="card-text">Uploaddate: {{ $FileValue->File_uploaddate }}</p>
+                <p class="card-text">Size: {{ $FileValue->File_size }} in megabytes</p>
+                <p class="card-text">Uploader: {{ $FileValue->name }}</p>
                 
                 <form action="{{ route('admin.delete', $FileValue->File_hash) }}" method="post" class="d-inline">
                     @csrf
