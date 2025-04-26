@@ -137,9 +137,6 @@
         @if ($AllFiles->count() == 0)
             <h2 class="h2">No files found!</h2>
         @endif
-    </div>
-
-
 
         @foreach ($AllFiles as $FileValue)
         <div class="card mb-4">
@@ -165,11 +162,15 @@
                     <button type="submit" class="btn btn-success btn-sm">Download file</button>
                 </form>
 
-                
+                <!-- FELTÖLTŐ NEVE HIÁNYZIK -->
                 <span onclick="CopyLink('{{$FileValue->File_hash}}')" class="text-primary text-decoration-underline" style="cursor: pointer;">Copy link</span>
             </div>
         </div>
         @endforeach
+    </div>
+
+
+
 
 
 
